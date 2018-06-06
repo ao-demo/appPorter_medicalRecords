@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>mysql_jdbc_demo</context-root>
+</jboss-web>

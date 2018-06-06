@@ -1,0 +1,19 @@
+
+
+create table doctor 
+( id  int Primary key ,
+  firstname varchar(100),
+  lastname varchar(100),
+  contact_1   int,
+  alternate_contact int,
+  Specialization varchar(100) )
+
+
+create table patient
+( id  int Primary key ,
+  firstname varchar(100),
+  lastname varchar(100),
+  contact   int,
+  address1 varchar(50),
+  address2 varchar(50) 
+  )

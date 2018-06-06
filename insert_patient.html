@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="heading">Add New Patient</div>
+
+        <div class="form-container">
+            <div class="row">
+                <label>First Name</label>
+                <input type="text" name="firstname">
+            </div>
+
+            <div class="row">
+                <label>Last Name</label>
+                <input type="text" name="lastname">
+            </div>
+
+            <div class="row">
+                <label>Address</label>
+                <input type="text" name="address">
+            </div>
+		<div class="row">
+                <label>City</label>
+                <input type="text" name="city">
+            </div>
+
+			
+            <input type="submit" value="SUBMIT" id="addPatient">
+        </div>
+
+        <div class="backdrop-image">
+        </div>
+
+        <script>
+        $(function() {
+            $('#addPatient').on( 'click', function () {
+                var form = {
+                    firstname: $( 'input[name="firstname"]' ).val(),
+                    lastname: $( 'input[name="lastname"]' ).val(),
+                    address: $( 'input[name="address"]' ).val(),
+					city: $( 'input[name="city"]' ).val()
+                };
+
+                if ( form.firstname && form.lastname && form.address  && form.city ) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'insert_patient_detail.jsp',
+                        data: form,
+                        success: function () {
+                            alert( 'Success' );
+                            $( 'input[name="firstname"]' ).val( '' );
+                            $( 'input[name="lastname"]' ).val( '' );
+                            $( 'input[name="address"]' ).val( '' );
+							$( 'input[name="city"]' ).val( '' );
+							$( '.success-block' ).show();
+                        },
+                        error: function ( resp ) {
+                            $( '.error-block' ).text('Error adding the doctor.');
+                            $( '.error-block' ).show();
+                        }
+                    });
+                } else {
+                    $( '.error-block' ).text('One or more fields are empty.');
+                    $( '.error-block' ).show();
+                }
+
+
+                return false;
+
+            });
+        } );
+        </script>
+    </body>
+</html>

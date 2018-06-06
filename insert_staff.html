@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div class="heading">Add New Staff</div>
+
+        <div class="form-container">
+            <div class="row">
+                <label>First Name</label>
+                <input type="text" name="firstname">
+            </div>
+
+            <div class="row">
+                <label>Last Name</label>
+                <input type="text" name="lastname">
+            </div>
+
+            <div class="row">
+                <label>Department</label>
+                <input type="text" name="department">
+            </div>
+		<div class="row">
+                <label>shift</label>
+                <input type="text" name="shift">
+            </div>
+
+			
+            <input type="submit" value="SUBMIT" id="addStaff">
+        </div>
+
+        <div class="backdrop-image">
+        </div>
+
+        <script>
+        $(function() {
+            $('#addStaff').on( 'click', function () {
+                var form = {
+                    firstname: $( 'input[name="firstname"]' ).val(),
+                    lastname: $( 'input[name="lastname"]' ).val(),
+                    department: $( 'input[name="department"]' ).val(),
+					shift: $( 'input[name="shift"]' ).val()
+                };
+
+                if ( form.firstname && form.lastname && form.department && form.shift ) {
+                    $.ajax({
+                        type: 'post',
+                        url: 'insert_staff_detail.jsp',
+                        data: form,
+                        success: function () {
+                            alert( 'Success' );
+                            $( 'input[name="firstname"]' ).val( '' );
+                            $( 'input[name="lastname"]' ).val( '' );
+                            $( 'input[name="department"]' ).val( '' );
+							$( 'input[name="shift"]' ).val( '' );
+							$( '.success-block' ).show();
+                        },
+                        error: function ( resp ) {
+                            $( '.error-block' ).text('Error adding the doctor.');
+                            $( '.error-block' ).show();
+                        }
+                    });
+                } else {
+                    $( '.error-block' ).text('One or more fields are empty.');
+                    $( '.error-block' ).show();
+                }
+
+
+                return false;
+
+            });
+        } );
+        </script>
+    </body>
+</html>
